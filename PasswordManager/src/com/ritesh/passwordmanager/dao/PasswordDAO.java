@@ -10,7 +10,7 @@ import com.ritesh.passwordmanager.model.Password;
 public class PasswordDAO {
 
     public boolean savePassword(Password password) {
-
+    	
         String sql = "INSERT INTO passwords (website, username, password) VALUES (?, ?, ?)";
 
         try (

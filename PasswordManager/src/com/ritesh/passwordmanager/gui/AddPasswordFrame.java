@@ -1,5 +1,7 @@
 package com.ritesh.passwordmanager.gui;
 import com.ritesh.passwordmanager.encryption.AESUtil;
+import com.ritesh.passwordmanager.model.Password;
+import com.ritesh.passwordmanager.dao.PasswordDAO;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -100,58 +102,101 @@ public class AddPasswordFrame extends JFrame {
         // Save Button
     	saveButton.addActionListener(new ActionListener() {
 
-    	    @Override
-    	    public void actionPerformed(ActionEvent e) {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
 
-    	        // Read Website
-    	        String website = websiteField.getText().trim();
+    		    
+    		    // Read Data
+    		    
+    		    String website = websiteField.getText().trim();
+    		    String username = usernameField.getText().trim();
+    		    String password = new String(passwordField.getPassword());
 
-    	        // Read Username
-    	        String username = usernameField.getText().trim();
+    		    
+    		    // Add Validation
+    		   
+    		    if (website.isEmpty()) {
 
-    	        // Read Password
-    	        String password = new String(passwordField.getPassword());
+    		        JOptionPane.showMessageDialog(AddPasswordFrame.this,
+    		                "Website is required!");
 
-    	        // Validation
-    	        if (website.isEmpty()) {
+    		        websiteField.requestFocus();
+    		        return;
+    		    }
 
-    	            JOptionPane.showMessageDialog(null,
-    	                    "Website is required!");
+    		    if (username.isEmpty()) {
 
-    	            websiteField.requestFocus();
-    	            return;
-    	        }
+    		        JOptionPane.showMessageDialog(AddPasswordFrame.this,
+    		                "Username is required!");
 
-    	        if (username.isEmpty()) {
+    		        usernameField.requestFocus();
+    		        return;
+    		    }
 
-    	            JOptionPane.showMessageDialog(null,
-    	                    "Username is required!");
+    		    if (password.isEmpty()) {
 
-    	            usernameField.requestFocus();
-    	            return;
-    	        }
+    		        JOptionPane.showMessageDialog(AddPasswordFrame.this,
+    		                "Password is required!");
 
-    	        if (password.isEmpty()) {
+    		        passwordField.requestFocus();
+    		        return;
+    		    }
 
-    	            JOptionPane.showMessageDialog(null,
-    	                    "Password is required!");
+    		    
+    		    // Encrypt Password
+    		   
+    		    String encryptedPassword = AESUtil.encrypt(password);
 
-    	            passwordField.requestFocus();
-    	            return;
-    	        }
+    		    
+    		    // Create Password Object
+    		    
+    		    Password passwordObj = new Password();
 
-    	        
-    	        // AES Encryption 
-    	       
+    		    passwordObj.setWebsite(website);
+    		    passwordObj.setUsername(username);
+    		    passwordObj.setPassword(encryptedPassword);
 
-    	        String encryptedPassword = AESUtil.encrypt(password);
+    		    
+    		    // Print Output
+    		   
+    		    System.out.println("Website : " + passwordObj.getWebsite());
+    		    System.out.println("Username : " + passwordObj.getUsername());
+    		    System.out.println("Original Password : " + password);
+    		    System.out.println("Encrypted Password : " + passwordObj.getPassword());
 
-    	        System.out.println("Original Password : " + password);
-    	        System.out.println("Encrypted Password : " + encryptedPassword);
+    		    
+    		    // Save in to Database
+    		 
+    		    PasswordDAO dao = new PasswordDAO();
 
-    	    }
+    		    boolean status = dao.savePassword(passwordObj);
 
-    	});
+    		    
+    		    // Show Password Result
+    		   
+    		    if (status) {
+
+    		        JOptionPane.showMessageDialog(AddPasswordFrame.this,
+    		                "Password Saved Successfully!");
+
+    		        // Clear Fields
+    		        websiteField.setText("");
+    		        usernameField.setText("");
+    		        passwordField.setText("");
+
+    		        // Focus on Website Field Data
+    		        websiteField.requestFocus();
+
+    		    } else {
+
+    		        JOptionPane.showMessageDialog(AddPasswordFrame.this,
+    		                "Failed to Save Password!");
+
+    		    }
+    		  }
+
+    		});
+    	
 
         // Clear Button
         clearButton.addActionListener(new ActionListener() {
