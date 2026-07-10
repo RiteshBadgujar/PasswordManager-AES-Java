@@ -108,18 +108,19 @@ public class DashboardFrame extends JFrame {
 
         });
 
-        
-        addButton.addActionListener(new ActionListener() {
+    
+        // View Password Button
+       viewButton.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    	   public void actionPerformed(ActionEvent e) {
 
-                System.out.println("Add Button Clicked");
+            ViewPasswordsFrame viewPasswordsFrame = new ViewPasswordsFrame();
+            viewPasswordsFrame.setVisible(true);
 
-            }
+        }
 
-        });
-
-    }
-
+    });
+       
+  }
+    
 }
