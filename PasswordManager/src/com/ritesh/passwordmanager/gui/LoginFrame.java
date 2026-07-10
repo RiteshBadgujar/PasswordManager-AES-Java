@@ -100,27 +100,24 @@ public class LoginFrame extends JFrame {
     }
 
     // Login Method
+    
     private void login() {
 
         String password = new String(passwordField.getPassword());
 
         if (password.equals("admin123")) {
 
-            JOptionPane.showMessageDialog(this,
-                    "Login Successful!");
+            JOptionPane.showMessageDialog(this, "Login Successful!");
 
-            // Dashboard will open here in the next module
+            DashboardFrame dashboard = new DashboardFrame();
+            dashboard.setVisible(true);
+
+            dispose();
 
         } else {
 
-            JOptionPane.showMessageDialog(this,
-                    "Invalid Master Password!");
-
-            passwordField.setText("");
-            passwordField.requestFocus();
+            JOptionPane.showMessageDialog(this, "Invalid Password!");
 
         }
-
     }
-
 }

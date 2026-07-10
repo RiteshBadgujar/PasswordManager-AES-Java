@@ -8,7 +8,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESUtil {
 
     // 16-character secret key (AES-128)
-    private static final String SECRET_KEY = "PasswordKey1234";
+  //  private static final String SECRET_KEY = "PasswordKey123456";
+    private static final String SECRET_KEY = "1234567890123456";
 
     // Encrypt Method
     public static String encrypt(String password) {
