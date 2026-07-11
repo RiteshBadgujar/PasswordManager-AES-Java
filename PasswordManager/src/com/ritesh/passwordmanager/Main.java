@@ -10,8 +10,6 @@ public class Main {
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setVisible(true);
         
-//        AddPasswordFrame frame = new AddPasswordFrame();
-//        frame.setVisible(true);
 
     }
 

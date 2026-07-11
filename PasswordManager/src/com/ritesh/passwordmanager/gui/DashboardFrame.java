@@ -119,8 +119,45 @@ public class DashboardFrame extends JFrame {
 
         }
 
-    });
+       });
+       
+    //Search Password Button
+       searchButton.addActionListener(new ActionListener() {
+
+           @Override
+           public void actionPerformed(ActionEvent e) {
+
+               SearchPasswordFrame searchPasswordFrame = new SearchPasswordFrame();
+               searchPasswordFrame.setVisible(true);
+
+           }
+
+       });
+       
+       //Update Password Button
+       updateButton.addActionListener(new ActionListener() {
+
+    	    @Override
+    	    public void actionPerformed(ActionEvent e) {
+
+    	        UpdatePasswordFrame frame = new UpdatePasswordFrame();
+    	        frame.setVisible(true);
+
+    	    }
+
+    	});
+       deleteButton.addActionListener(new ActionListener() {
+
+    	    @Override
+    	    public void actionPerformed(ActionEvent e) {
+
+    	        DeletePasswordFrame frame = new DeletePasswordFrame();
+    	        frame.setVisible(true);
+
+    	    }
+
+    	});
        
   }
-    
+   
 }
