@@ -28,12 +28,13 @@ public class AddPasswordFrame extends JFrame {
     private JButton saveButton;
     private JButton clearButton;
     private JButton backButton;
+    private JButton showButton;
 
     // Constructor
     public AddPasswordFrame() {
 
         setTitle("Add Password");
-        setSize(500, 400);
+        setSize(600, 500);
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
@@ -61,6 +62,7 @@ public class AddPasswordFrame extends JFrame {
         saveButton = new JButton("Save");
         clearButton = new JButton("Clear");
         backButton = new JButton("Back");
+        showButton = new JButton("Show");
     }
 
     // Add Components
@@ -80,6 +82,8 @@ public class AddPasswordFrame extends JFrame {
         saveButton.setBounds(50, 260, 100, 35);
         clearButton.setBounds(190, 260, 100, 35);
         backButton.setBounds(330, 260, 100, 35);
+        showButton.setBounds(430, 180, 80, 25);
+
 
         add(titleLabel);
 
@@ -94,6 +98,8 @@ public class AddPasswordFrame extends JFrame {
         add(saveButton);
         add(clearButton);
         add(backButton);
+        add(showButton);
+
     }
 
     // Events
@@ -198,7 +204,7 @@ public class AddPasswordFrame extends JFrame {
     		});
     	
 
-        // Clear Button
+        // Clear Button Event
         clearButton.addActionListener(new ActionListener() {
 
             @Override
@@ -223,6 +229,37 @@ public class AddPasswordFrame extends JFrame {
             }
 
         });
+        
+        //Password Show & Hide Logic code.
+        showButton.addActionListener(new ActionListener() {
+
+            private boolean visible = false;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (!visible) {
+
+                    passwordField.setEchoChar((char) 0);
+
+                    showButton.setText("Hide");
+
+                    visible = true;
+
+                } else {
+
+                    passwordField.setEchoChar('*');
+
+                    showButton.setText("Show");
+
+                    visible = false;
+
+                }
+
+            }
+
+        });
+        
 
     }
 

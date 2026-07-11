@@ -29,11 +29,12 @@ public class UpdatePasswordFrame extends JFrame {
     private JButton searchButton;
     private JButton updateButton;
     private JButton backButton;
+    private JButton showButton;
 
     public UpdatePasswordFrame() {
 
         setTitle("Update Password");
-        setSize(550,420);
+        setSize(600,420);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -61,6 +62,7 @@ public class UpdatePasswordFrame extends JFrame {
         searchButton = new JButton("Search");
         updateButton = new JButton("Update");
         backButton = new JButton("Back");
+        showButton = new JButton("Show");
 
     }
 
@@ -81,6 +83,9 @@ public class UpdatePasswordFrame extends JFrame {
 
         updateButton.setBounds(120,280,120,35);
         backButton.setBounds(290,280,120,35);
+        showButton.setBounds(480, 190, 80, 25);
+
+       
 
         add(titleLabel);
 
@@ -95,6 +100,7 @@ public class UpdatePasswordFrame extends JFrame {
         add(searchButton);
         add(updateButton);
         add(backButton);
+        add(showButton);
 
     }
 
@@ -219,6 +225,36 @@ public class UpdatePasswordFrame extends JFrame {
 
                     JOptionPane.showMessageDialog(UpdatePasswordFrame.this,
                             "Update Failed!");
+
+                }
+
+            }
+
+        });
+        
+        //Password show & Hide logic code
+        showButton.addActionListener(new ActionListener() {
+
+            private boolean visible = false;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (!visible) {
+
+                    passwordField.setEchoChar((char) 0);
+
+                    showButton.setText("Hide");
+
+                    visible = true;
+
+                } else {
+
+                    passwordField.setEchoChar('*');
+
+                    showButton.setText("Show");
+
+                    visible = false;
 
                 }
 

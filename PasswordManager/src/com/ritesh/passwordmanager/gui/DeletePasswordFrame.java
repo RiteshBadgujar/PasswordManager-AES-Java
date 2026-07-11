@@ -27,11 +27,12 @@ public class DeletePasswordFrame extends JFrame {
     private JButton searchButton;
     private JButton deleteButton;
     private JButton backButton;
+    private JButton showButton;
 
     public DeletePasswordFrame() {
 
         setTitle("Delete Password");
-        setSize(550, 420);
+        setSize(600, 420);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -61,6 +62,7 @@ public class DeletePasswordFrame extends JFrame {
         searchButton = new JButton("Search");
         deleteButton = new JButton("Delete");
         backButton = new JButton("Back");
+        showButton = new JButton("Show");
     }
 
     private void addComponents() {
@@ -80,6 +82,9 @@ public class DeletePasswordFrame extends JFrame {
 
         deleteButton.setBounds(120, 280, 120, 35);
         backButton.setBounds(290, 280, 120, 35);
+        showButton.setBounds(500, 190, 80, 25);
+
+        
 
         add(titleLabel);
         add(websiteLabel);
@@ -93,6 +98,7 @@ public class DeletePasswordFrame extends JFrame {
         add(searchButton);
         add(deleteButton);
         add(backButton);
+        add(showButton);
     }
 
     private void addEvents() {
@@ -198,6 +204,35 @@ public class DeletePasswordFrame extends JFrame {
 
                     JOptionPane.showMessageDialog(DeletePasswordFrame.this,
                             "Password Not Found!");
+
+                }
+
+            }
+
+        });
+        //Password show & Hide logic code
+        showButton.addActionListener(new ActionListener() {
+
+            private boolean visible = false;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (!visible) {
+
+                    passwordField.setEchoChar((char) 0);
+
+                    showButton.setText("Hide");
+
+                    visible = true;
+
+                } else {
+
+                    passwordField.setEchoChar('*');
+
+                    showButton.setText("Show");
+
+                    visible = false;
 
                 }
 
