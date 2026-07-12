@@ -1,4 +1,5 @@
 package com.ritesh.passwordmanager.gui;
+import com.ritesh.passwordmanager.encryption.AESUtil;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -148,7 +149,9 @@ public class DeletePasswordFrame extends JFrame {
                 com.ritesh.passwordmanager.model.Password password = list.get(0);
 
                 usernameField.setText(password.getUsername());
-                passwordField.setText(password.getPassword());
+                passwordField.setText(
+                        AESUtil.decrypt(password.getPassword())
+                );
 
             }
 

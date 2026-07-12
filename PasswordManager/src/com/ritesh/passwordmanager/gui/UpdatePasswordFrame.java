@@ -156,7 +156,9 @@ public class UpdatePasswordFrame extends JFrame {
                 usernameField.setText(password.getUsername());
 
                 // Show encrypted password (for now)
-                passwordField.setText(password.getPassword());
+                passwordField.setText(
+                        AESUtil.decrypt(password.getPassword())
+                );
 
             }
 
@@ -213,6 +215,10 @@ public class UpdatePasswordFrame extends JFrame {
 
                 // Update Database
                 PasswordDAO dao = new PasswordDAO();
+                System.out.println("Website : " + website);
+                System.out.println("Username : " + username);
+                System.out.println("Original Password : " + password);
+                System.out.println("Encrypted Password : " + encryptedPassword);
 
                 boolean status = dao.updatePassword(passwordObj);
 

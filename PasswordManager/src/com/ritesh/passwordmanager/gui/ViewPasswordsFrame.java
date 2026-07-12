@@ -1,4 +1,5 @@
 package com.ritesh.passwordmanager.gui;
+import com.ritesh.passwordmanager.encryption.AESUtil;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -95,7 +96,7 @@ public class ViewPasswordsFrame extends JFrame {
 
                 password.getWebsite(),
                 password.getUsername(),
-                password.getPassword()
+                AESUtil.decrypt(password.getPassword())
 
             };
 
